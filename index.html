@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
     <title>Flash Cards</title>
 </head>
 <body class="container">
@@ -11,16 +12,16 @@
     <div class="row">
       <div id="left" class="col-6">
         <div id="viewer">
-          <div class="card bg-light" style="border-radius: 1rem; min-height: 20rem;">
+          <div id="cardFront" class="card bg-light">
             <div class="card-body d-flex align-items-center">
-              <div id="cardFront" style="font-size: 2rem;">
+              <div class="flashcard-text">
                   Who sang the popular theme from the movie Titanic?
               </div>
             </div>
           </div>
-          <div class="card bg-light" style="border-radius: 1rem; min-height: 20rem;">
+          <div id="cardBack" class="card bg-light">
             <div class="card-body d-flex align-items-center">
-              <div id="cardBack" style="font-size: 2rem;">
+              <div class="flashcard-text">
                   Celine Dion
               </div>
             </div>
