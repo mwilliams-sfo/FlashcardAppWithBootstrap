@@ -3,6 +3,6 @@
   min-height: 20rem;
 }
 
-.flashcard-text {
+#cardText {
   font-size: 2rem;
 }
