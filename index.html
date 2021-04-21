@@ -6,8 +6,54 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Flash Cards</title>
 </head>
-<body>
-    <h1>Hello World</h1>
+<body class="container">
+    <h1>Flashcards</h1>
+    <div class="row">
+      <div id="left" class="col-6">
+        <div id="viewer">
+          <div id="cardFront" class="card bg-light br-10" style="border-radius: 1rem; font-size: 2rem; min-height: 20rem;">
+            <span class="card-body">
+              Who sang the popular theme from the movie Titanic?
+            </span>
+          </div>
+          <div id="cardBack" class="card bg-light br-10" style="border-radius: 1rem; font-size: 2rem; min-height: 20rem;">
+            <span class="card-body">
+              Celine Dion
+            </span>
+          </div>
+          <p>Card #<span id="cardNumber">1</span></p>
+          <button id="flipCard" class="btn btn-primary w-100">Flip Card</button>
+        </div>
+        <div id="editor">
+          <label for="editFront">Front of Card (Term or Question)</label>
+          <textarea id="editFront" class="mb-3 w-100 form-control"></textarea>
+          <label for="editBack">Back of Card (Definition or Answer)</label>
+          <textarea id="editBack" class="mb-3 w-100 form-control"></textarea>
+          <button id="saveCard" class="mb-3 w-100 btn btn-primary">Save Card</button>
+          <button id="reviewCards" class="w-100 btn btn-primary">Review Cards</button>
+        </div>
+      </div>
+      <div id="right" class="col-6">
+        <div id="viewerGuide">
+          <h2>Review Your Cards</h2>
+          <p>
+            When you want to see the answer or definition, tap on the card and it
+            will appear
+          </p>
+        </div>
+        <div id="editorGuide">
+          <h2>Make a Flash Card</h2>
+          <p>
+            Let's make a flash card. On the front of the flash card put the term
+            or question you're trying to remember and the definiton or answer on
+            the back.
+          </p>
+        </div>
+        <p>Number of Flashcards: <span id="numberOfCards">4</span></p>
+        <button id="addCards" class="btn btn-primary w-100">Add Cards</button>
+      </div>
+    </div>
+
     <script src="flashcards.js"></script>
     <!--- Bootstrap Required Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
