@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <div id="cardBack" class="card bg-light">
+          <div id="cardBack" class="card bg-light d-none">
             <div class="card-body d-flex align-items-center">
               <div class="flashcard-text">
                   Celine Dion
@@ -29,7 +29,7 @@
           <p>Card #<span id="cardNumber">1</span></p>
           <button id="flipCard" class="btn btn-primary w-100">Flip Card</button>
         </div>
-        <div id="editor">
+        <div id="editor" class="d-none">
           <label for="editFront">Front of Card (Term or Question)</label>
           <textarea id="editFront" class="mb-3 w-100 form-control"></textarea>
           <label for="editBack">Back of Card (Definition or Answer)</label>
@@ -46,7 +46,7 @@
             will appear
           </p>
         </div>
-        <div id="editorGuide">
+        <div id="editorGuide" class="d-none">
           <h2>Make a Flash Card</h2>
           <p>
             Let's make a flash card. On the front of the flash card put the term
