@@ -72,18 +72,33 @@ const update = function() {
     validate();
     document.querySelector('#reviewCards').disabled = (cards.length === 0);
   }
-   document.querySelector('#numberOfCards').textContent = `${cards.length}`
+  document.querySelector('#numberOfCards').textContent = `${cards.length}`
 };
 
 const loadCards = function() {
-  localforage.getItem('cards', (err, value) => {
-    if (err) {
-      console.log(err);
-    } else if (value) {
-      cards = value;
-    }
-    editing = (cards.length === 0);
-    update();
+  return new Promise((resolve, reject) => {
+    localforage.getItem('cards', (err, value) => {
+      try {
+        if (err) throw err;
+        if (value) {
+          cards = value;
+        }
+        editing = (cards.length === 0);
+        update();
+        resolve();
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
+};
+
+const saveCard = function(card) {
+  return new Promise((resolve, reject) => {
+    cards.push(card);
+    localforage.setItem('cards', cards, err => {
+      err ? reject(err) : resolve();
+    });
   });
 };
 
@@ -123,14 +138,11 @@ window.addEventListener('load', evt => {
   document.querySelector('#saveCard').addEventListener('click', evt => {
     const editFront = document.querySelector('#editFront');
     const editBack = document.querySelector('#editBack');
-    cards.push({
+    saveCard({
       front: editFront.value.trim(),
-      back: editBack.value.trim(),
+      back: editBack.value.trim()
     });
     editFront.value = editBack.value = '';
-    localforage.setItem('cards', cards, err => {
-      if (err) console.log(err);
-    });
     update();
   });
 
