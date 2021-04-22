@@ -46,6 +46,13 @@ const toggleClass = function(elt, name) {
   }
 };
 
+const validate = function() {
+  const editFront = document.querySelector('#editFront');
+  const editBack = document.querySelector('#editBack');
+  document.querySelector('#saveCard').disabled =
+    editFront.value.trim() === '' || editBack.value.trim() === '';
+}
+
 const update = function() {
   if (!editing) {
     addClass(document.querySelector('#editor'), 'd-none');
@@ -59,6 +66,7 @@ const update = function() {
     addClass(document.querySelector('#addCards'), 'd-none');
     removeClass(document.querySelector('#editor'), 'd-none');
     removeClass(document.querySelector('#editorGuide'), 'd-none');
+    validate();
   }
 
   const cardText = document.querySelector('#cardText');
@@ -98,7 +106,27 @@ window.addEventListener('load', evt => {
 
   document.querySelector('#addCards').addEventListener('click', evt => {
     editing = true;
+    document.querySelector('#editFront').value = '';
+    document.querySelector('#editBack').value = '';
     update();
+  });
+
+
+  document.querySelector('#editFront').addEventListener('change', evt => {
+    validate();
+  });
+  document.querySelector('#editBack').addEventListener('change', evt => {
+    validate();
+  });
+
+  document.querySelector('#saveCard').addEventListener('click', evt => {
+    const editFront = document.querySelector('#editFront');
+    const editBack = document.querySelector('#editBack');
+    cards.push({
+      front: editFront.value.trim(),
+      back: editBack.value.trim(),
+    });
+    editFront.value = editBack.value = '';
   });
 
   document.querySelector('#reviewCards').addEventListener('click', evt => {
