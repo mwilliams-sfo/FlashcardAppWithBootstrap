@@ -1,17 +1,8 @@
 
-let cards = [
-  {
-    front: 'Who sang the popular theme from the movie Titanic?',
-    back: 'Celine Dion'
-  },
-  {
-    front: 'What is the capital of Rhode Island?',
-    back: 'Providence'
-  }
-];
+let cards = [];
 let cardNumber = 0;
 let cardFlipped = false;
-let editing = false;
+let editing = true;
 
 const hasClass = function(elt, name) {
   const styles = (elt.className || '').trim().split(/\s+/);
@@ -60,6 +51,19 @@ const update = function() {
     removeClass(document.querySelector('#viewer'), 'd-none');
     removeClass(document.querySelector('#viewerGuide'), 'd-none');
     removeClass(document.querySelector('#addCards'), 'd-none');
+
+    const cardText = document.querySelector('#cardText');
+    cardText.textContent = '';
+    const card = cards[cardNumber];
+    if (card) {
+      cardText.textContent = cardFlipped ? card.back : card.front;
+    }
+
+    const cardCaption = document.querySelector('#cardCaption');
+    cardCaption.textContent =
+      (cards.length == 0) ? 'No cards' :
+      (0 <= cardNumber && cardNumber < cards.length) ? `Card #${cardNumber + 1}` :
+      '';
   } else {
     addClass(document.querySelector('#viewer'), 'd-none');
     addClass(document.querySelector('#viewerGuide'), 'd-none');
@@ -67,23 +71,11 @@ const update = function() {
     removeClass(document.querySelector('#editor'), 'd-none');
     removeClass(document.querySelector('#editorGuide'), 'd-none');
     validate();
+    document.querySelector('#reviewCards').disabled = (cards.length === 0);
   }
 
-  const cardText = document.querySelector('#cardText');
-  cardText.textContent = '';
-  const card = cards[cardNumber];
-  if (card) {
-    cardText.textContent = cardFlipped ? card.back : card.front;
-  }
-
-  const cardCaption = document.querySelector('#cardCaption');
-  cardCaption.textContent =
-    (cards.length == 0) ? 'No cards' :
-    (0 <= cardNumber && cardNumber < cards.length) ? `Card #${cardNumber + 1}` :
-    '';
-
-    const numberOfCards = document.querySelector('#numberOfCards');
-    numberOfCards.textContent = `${cards.length}`
+  const numberOfCards = document.querySelector('#numberOfCards');
+  numberOfCards.textContent = `${cards.length}`
 };
 
 window.addEventListener('load', evt => {
@@ -127,6 +119,7 @@ window.addEventListener('load', evt => {
       back: editBack.value.trim(),
     });
     editFront.value = editBack.value = '';
+    update();
   });
 
   document.querySelector('#reviewCards').addEventListener('click', evt => {
