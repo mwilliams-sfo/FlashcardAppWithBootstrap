@@ -3,6 +3,10 @@ let cards = [
   {
     front: 'Who sang the popular theme from the movie Titanic?',
     back: 'Celine Dion'
+  },
+  {
+    front: 'What is the capital of Rhode Island?',
+    back: 'Providence'
   }
 ];
 let cardNumber = 0;
@@ -57,6 +61,16 @@ const update = function() {
 
 window.addEventListener('load', evt => {
   update();
+
+  document.querySelector('#viewer .card').addEventListener('click', evt => {
+    if (cards.length === 0 || cardNumber < 0 || cards.length <= cardNumber) {
+      cardNumber = 0;
+    } else {
+      cardNumber = (cardNumber + 1) % cards.length;
+      cardFlipped = false;
+    }
+    update();
+  });
 
   document.querySelector('#flipCard').addEventListener('click', evt => {
     cardFlipped = !cardFlipped;
