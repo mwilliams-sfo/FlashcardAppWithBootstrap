@@ -104,10 +104,10 @@ window.addEventListener('load', evt => {
   });
 
 
-  document.querySelector('#editFront').addEventListener('change', evt => {
+  document.querySelector('#editFront').addEventListener('keydown', evt => {
     validate();
   });
-  document.querySelector('#editBack').addEventListener('change', evt => {
+  document.querySelector('#editBack').addEventListener('keydown', evt => {
     validate();
   });
 
