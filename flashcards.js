@@ -2,7 +2,7 @@
 let cards = [];
 let cardNumber = 0;
 let cardFlipped = false;
-let editing = true;
+let editing = false;
 
 const hasClass = function(elt, name) {
   const styles = (elt.className || '').trim().split(/\s+/);
@@ -78,6 +78,18 @@ const update = function() {
   numberOfCards.textContent = `${cards.length}`
 };
 
+const loadCards = function() {
+  localforage.getItem('cards', (err, value) => {
+    if (err) {
+      console.log(err);
+    } else if (value) {
+      cards = value;
+    }
+    editing = (cards.length === 0);
+    update();
+  });
+};
+
 window.addEventListener('load', evt => {
   update();
 
@@ -119,6 +131,9 @@ window.addEventListener('load', evt => {
       back: editBack.value.trim(),
     });
     editFront.value = editBack.value = '';
+    localforage.setItem('cards', cards, err => {
+      if (err) console.log(err);
+    });
     update();
   });
 
@@ -127,4 +142,6 @@ window.addEventListener('load', evt => {
     cardFlipped = false;
     update();
   });
+
+  loadCards();
 });
