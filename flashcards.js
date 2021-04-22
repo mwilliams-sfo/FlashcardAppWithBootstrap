@@ -42,15 +42,27 @@ const validate = function() {
   const editBack = document.querySelector('#editBack');
   document.querySelector('#saveCard').disabled =
     editFront.value.trim() === '' || editBack.value.trim() === '';
-}
+};
+
+const showViewer = function() {
+  addClass(document.querySelector('#editor'), 'd-none');
+  addClass(document.querySelector('#editorGuide'), 'd-none');
+  removeClass(document.querySelector('#viewer'), 'd-none');
+  removeClass(document.querySelector('#viewerGuide'), 'd-none');
+  removeClass(document.querySelector('#addCards'), 'd-none');
+};
+
+const showEditor = function() {
+  addClass(document.querySelector('#viewer'), 'd-none');
+  addClass(document.querySelector('#viewerGuide'), 'd-none');
+  addClass(document.querySelector('#addCards'), 'd-none');
+  removeClass(document.querySelector('#editor'), 'd-none');
+  removeClass(document.querySelector('#editorGuide'), 'd-none');
+};
 
 const update = function() {
   if (!editing) {
-    addClass(document.querySelector('#editor'), 'd-none');
-    addClass(document.querySelector('#editorGuide'), 'd-none');
-    removeClass(document.querySelector('#viewer'), 'd-none');
-    removeClass(document.querySelector('#viewerGuide'), 'd-none');
-    removeClass(document.querySelector('#addCards'), 'd-none');
+    showViewer();
 
     const cardText = document.querySelector('#cardText');
     cardText.textContent = '';
@@ -59,23 +71,16 @@ const update = function() {
       cardText.textContent = cardFlipped ? card.back : card.front;
     }
 
-    const cardCaption = document.querySelector('#cardCaption');
-    cardCaption.textContent =
+    document.querySelector('#cardCaption').textContent =
       (cards.length == 0) ? 'No cards' :
       (0 <= cardNumber && cardNumber < cards.length) ? `Card #${cardNumber + 1}` :
       '';
   } else {
-    addClass(document.querySelector('#viewer'), 'd-none');
-    addClass(document.querySelector('#viewerGuide'), 'd-none');
-    addClass(document.querySelector('#addCards'), 'd-none');
-    removeClass(document.querySelector('#editor'), 'd-none');
-    removeClass(document.querySelector('#editorGuide'), 'd-none');
+    showEditor();
     validate();
     document.querySelector('#reviewCards').disabled = (cards.length === 0);
   }
-
-  const numberOfCards = document.querySelector('#numberOfCards');
-  numberOfCards.textContent = `${cards.length}`
+   document.querySelector('#numberOfCards').textContent = `${cards.length}`
 };
 
 const loadCards = function() {
