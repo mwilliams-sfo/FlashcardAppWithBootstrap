@@ -29,14 +29,6 @@ const removeClass = function(elt, name) {
   }
 };
 
-const toggleClass = function(elt, name) {
-  if (hasClass(elt, name)) {
-    removeClass(elt, name);
-  } else {
-    addClass(elt, name);
-  }
-};
-
 const validate = function() {
   const editFront = document.querySelector('#editFront');
   const editBack = document.querySelector('#editBack');
