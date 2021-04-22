@@ -41,6 +41,12 @@ const toggleClass = function(elt, name) {
 };
 
 const update = function() {
+  const cardCaption = document.querySelector('#cardCaption');
+  cardCaption.textContent =
+    (cards.length == 0) ? 'No cards' :
+    (0 <= cardNumber && cardNumber < cards.length) ? `Card #${cardNumber + 1}` :
+    '';
+
   const cardText = document.querySelector('#cardText');
   cardText.textContent = '';
   const card = cards[cardNumber];
