@@ -11,6 +11,7 @@ let cards = [
 ];
 let cardNumber = 0;
 let cardFlipped = false;
+let editing = false;
 
 const hasClass = function(elt, name) {
   const styles = (elt.className || '').trim().split(/\s+/);
@@ -20,7 +21,7 @@ const hasClass = function(elt, name) {
 const addClass = function(elt, name) {
   if (!hasClass(elt, name)) {
     const styles = (elt.className || '').trim().split(/\s+/);
-    elt.className = styles.push(name).join(' ');
+    elt.className = styles.concat(name).join(' ');
   }
 };
 
@@ -33,6 +34,7 @@ const removeClass = function(elt, name) {
         i--;
       }
     }
+    elt.className = styles.join(' ');
   }
 };
 
@@ -45,6 +47,20 @@ const toggleClass = function(elt, name) {
 };
 
 const update = function() {
+  if (!editing) {
+    addClass(document.querySelector('#editor'), 'd-none');
+    addClass(document.querySelector('#editorGuide'), 'd-none');
+    removeClass(document.querySelector('#viewer'), 'd-none');
+    removeClass(document.querySelector('#viewerGuide'), 'd-none');
+    removeClass(document.querySelector('#addCards'), 'd-none');
+  } else {
+    addClass(document.querySelector('#viewer'), 'd-none');
+    addClass(document.querySelector('#viewerGuide'), 'd-none');
+    addClass(document.querySelector('#addCards'), 'd-none');
+    removeClass(document.querySelector('#editor'), 'd-none');
+    removeClass(document.querySelector('#editorGuide'), 'd-none');
+  }
+
   const cardCaption = document.querySelector('#cardCaption');
   cardCaption.textContent =
     (cards.length == 0) ? 'No cards' :
@@ -74,6 +90,17 @@ window.addEventListener('load', evt => {
 
   document.querySelector('#flipCard').addEventListener('click', evt => {
     cardFlipped = !cardFlipped;
+    update();
+  });
+
+  document.querySelector('#addCards').addEventListener('click', evt => {
+    editing = true;
+    update();
+  });
+
+  document.querySelector('#reviewCards').addEventListener('click', evt => {
+    editing = false;
+    cardFlipped = false;
     update();
   });
 });
