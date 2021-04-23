@@ -29,13 +29,6 @@ const removeClass = function(elt, name) {
   }
 };
 
-const validate = function() {
-  const editFront = document.querySelector('#editFront');
-  const editBack = document.querySelector('#editBack');
-  document.querySelector('#saveCard').disabled =
-    editFront.value.trim() === '' || editBack.value.trim() === '';
-};
-
 const showViewer = function() {
   addClass(document.querySelector('#editor'), 'd-none');
   addClass(document.querySelector('#editorGuide'), 'd-none');
@@ -69,7 +62,6 @@ const update = function() {
       '';
   } else {
     showEditor();
-    validate();
     document.querySelector('#reviewCards').disabled = (cards.length === 0);
   }
   document.querySelector('#numberOfCards').textContent = `${cards.length}`
@@ -127,15 +119,9 @@ window.addEventListener('load', evt => {
     update();
   });
 
-
-  document.querySelector('#editFront').addEventListener('keydown', evt => {
-    validate();
-  });
-  document.querySelector('#editBack').addEventListener('keydown', evt => {
-    validate();
-  });
-
   document.querySelector('#saveCard').addEventListener('click', evt => {
+    evt.preventDefault();
+    if (!document.querySelector('#editor').reportValidity()) return;
     const editFront = document.querySelector('#editFront');
     const editBack = document.querySelector('#editBack');
     saveCard({

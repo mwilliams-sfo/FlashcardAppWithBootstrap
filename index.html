@@ -20,14 +20,14 @@
           <p id="cardCaption"></p>
           <button id="flipCard" class="btn btn-primary w-100">Flip Card</button>
         </div>
-        <div id="editor" class="d-none">
+        <form id="editor" class="d-none">
           <label for="editFront">Front of Card (Term or Question)</label>
-          <textarea id="editFront" class="mb-3 w-100 form-control"></textarea>
+          <textarea id="editFront" class="mb-3 w-100 form-control" required></textarea>
           <label for="editBack">Back of Card (Definition or Answer)</label>
-          <textarea id="editBack" class="mb-3 w-100 form-control"></textarea>
+          <textarea id="editBack" class="mb-3 w-100 form-control" required></textarea>
           <button id="saveCard" class="mb-3 w-100 btn btn-primary">Save Card</button>
           <button id="reviewCards" class="w-100 btn btn-primary">Review Cards</button>
-        </div>
+        </form>
       </div>
       <div id="right" class="col-12 col-md">
         <div id="viewerGuide">
