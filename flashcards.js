@@ -70,19 +70,16 @@ const update = function() {
 const loadCards = function() {
   return new Promise((resolve, reject) => {
     localforage.getItem('cards', (err, value) => {
-      try {
-        if (err) throw err;
-        if (value) {
-          cards = value;
-        }
-        editing = (cards.length === 0);
-        update();
-        resolve();
-      } catch (err) {
-        reject(err);
+      err? reject(err) : resolve(value);
+    })
+  })
+    .then(value => {
+      if (value) {
+        cards = value;
       }
+      editing = (cards.length === 0);
+      update();
     });
-  });
 };
 
 const saveCard = function(card) {
